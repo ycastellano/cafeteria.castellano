@@ -1,0 +1,35 @@
+CREATE DATABASE CAFETERIA;
+USE CAFETERIA;
+
+CREATE TABLE CLIENTES (
+    IDCliente INT PRIMARY KEY,
+    NombreCliente VARCHAR(100) NOT NULL,
+    CorreoElectronico VARCHAR(100),
+    DNI INT(8)
+);
+
+CREATE TABLE PRODUCTOS (
+    IDProducto INT (10) PRIMARY KEY,
+    NombreProducto VARCHAR(100) NOT NULL,
+    Categoria VARCHAR(50),
+    Precio DECIMAL(10, 2),
+    Proveedor VARCHAR(50)
+);
+
+CREATE TABLE PROVEEDORES (
+    CUIT INT PRIMARY KEY,
+    NombreProveedor VARCHAR(100) NOT NULL,
+    IDProducto INT(10),
+    FOREIGN KEY (IDProducto) REFERENCES PRODUCTOS(IDProducto) 
+);
+
+CREATE TABLE VENTAS (
+    TicketDeVenta INT PRIMARY KEY,
+	IDProducto INT(10) NOT NULL,
+    IDCliente INT NOT NULL,
+    FechaVenta DATE NOT NULL,
+    Unidades INT (10),
+    Monto DECIMAL(10, 2),
+    FOREIGN KEY (IDProducto) REFERENCES PRODUCTOS(IDProducto),
+    FOREIGN KEY (IDCliente) REFERENCES CLIENTES(IDCliente)
+);
